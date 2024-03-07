@@ -1,10 +1,10 @@
 import SignupForm from '../../components/Signup/SignupForm';
-import ContentDivider from '../../components/ContentDivider';
+import ContentDivider from '../../shared/components/ContentDivider';
 import SocialLoginOptions from '../../components/Signup/SocialLoginOptions';
 
 const Signup = () => {
   return (
-    <main className='min-h-screen bg-white'>
+    <main className='min-h-screen overflow-y-hidden bg-white'>
       <div className='mx-auto mt-5 w-full h-full px-6'>
         <div className='flex items-center justify-center'>
           <div className='w-full px-6'>

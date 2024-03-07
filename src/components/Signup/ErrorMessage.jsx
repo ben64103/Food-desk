@@ -6,11 +6,7 @@ const ErrorMessage = ({ error }) => {
     setErrorMessage(null);
   }, 5000);
   return (
-    <>
-      {errorMessage && (
-        <div className='text-xs font-semibold text-red-600'>{errorMessage}</div>
-      )}
-    </>
+    <>{error && <div className='text-xs font-semibold text-red-600'>{error}</div>}</>
   );
 };
 

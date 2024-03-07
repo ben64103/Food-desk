@@ -1,4 +1,7 @@
-import { useFormik } from 'formik';
+import { Form, Formik } from 'formik';
+
+import RememberMe from './RememberMe';
+import ForgotPassword from './ForgotPassword';
 import FormField from '../../shared/components/FormField';
 
 const validate = (values) => {
@@ -17,57 +20,32 @@ const validate = (values) => {
 };
 
 const SignupForm = () => {
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-      remember: false,
-    },
-    validate,
-    onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
-    },
-  });
   return (
-    <form onSubmit={formik.handleSubmit} className='space-y-2.5'>
-      <FormField
-        type='email'
-        name='email'
-        label='Email Address'
-        placeholder='demo@example.com'
-        value={formik.values.email}
-        onChange={formik.handleChange}
-        error={formik.errors.email}
-      />
-      <FormField
-        type='password'
-        name='password'
-        label='Password'
-        placeholder='Enter password'
-        value={formik.values.password}
-        onChange={formik.handleChange}
-        error={formik.errors.password}
-      />
-      <div className='flex items-center py-5 space-x-2.5'>
-        <input
-          type='checkbox'
-          name='remember'
-          checked={formik.values.remember}
-          className='checked:bg-orange-500'
-          value={formik.values.remember}
-          onChange={formik.handleChange}
-        />
-        <label htmlFor='remember' className='text-sm text-gray-500 font-semibold'>
-          Remember my preference
-        </label>
-      </div>
+    <Formik
+      initialValues={{
+        email: '',
+        password: '',
+        remember: false,
+      }}
+      validate={validate}
+      onSubmit={(values) => console.log(JSON.stringify(values, null, 2))}>
+      {({ errors, touched }) => (
+        <Form className='space-y-2.5'>
+          <FormField name='email' label='email address' placeholder='demo@example.com' />
+          <FormField name='password' label='password' placeholder='enter password' />
+          <div className='space-y-2 pb-1'>
+            <RememberMe />
+            <ForgotPassword />
+          </div>
 
-      <button
-        type='submit'
-        className='w-full bg-orange-500 py-3 text-white font-semibold rounded-lg hover:bg-orange-600'>
-        Sign Me in
-      </button>
-    </form>
+          <button
+            type='submit'
+            className='w-full bg-orange-500 py-3 text-white font-semibold rounded-lg hover:bg-orange-600'>
+            Sign Me in
+          </button>
+        </Form>
+      )}
+    </Formik>
   );
 };
 
